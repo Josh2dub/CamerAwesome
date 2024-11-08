@@ -31,14 +31,6 @@ class AwesomeMediaPreview extends StatelessWidget {
               : null,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            decoration: BoxDecoration(
-              color: Colors.white30,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white38,
-                width: 2,
-              ),
-            ),
             child: ClipOval(child: _buildMedia(mediaCapture)),
           ),
         ),
