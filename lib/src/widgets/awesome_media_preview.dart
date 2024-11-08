@@ -72,17 +72,9 @@ class AwesomeMediaPreview extends StatelessWidget {
                       width: 300,
                     );
                   } else {
-                    return Platform.isIOS
-                        ? const CupertinoActivityIndicator(
-                            color: Colors.white,
-                          )
-                        : const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2.0,
-                            ),
-                          );
+                    return const CupertinoActivityIndicator(
+                      color: Color(0xFFFFEDEF),
+                    );
                   }
                 });
           } else {
