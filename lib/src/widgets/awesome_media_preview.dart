@@ -39,11 +39,9 @@ class AwesomeMediaPreview extends StatelessWidget {
   }
 
   Widget _buildMedia(MediaCapture? mediaCapture) {
-    debugPrint('mediaCapture?.status > ${mediaCapture?.status}');
     switch (mediaCapture?.status) {
       case MediaCaptureStatus.capturing:
         if (progressIndicator != null) {
-          debugPrint('MediaCaptureStatus.capturing indicator is not null');
           return progressIndicator!;
         } else {
           return Center(
@@ -64,7 +62,6 @@ class AwesomeMediaPreview extends StatelessWidget {
           );
         }
       case MediaCaptureStatus.success:
-        debugPrint('MediaCaptureStatus.success / ${mediaCapture!.isPicture}');
         if (mediaCapture!.isPicture) {
           if (kIsWeb) {
             // TODO Check if that works
@@ -82,7 +79,6 @@ class AwesomeMediaPreview extends StatelessWidget {
                     );
                   } else {
                     if (progressIndicator != null) {
-                      debugPrint('MediaCaptureStatus.success indicator is not null');
                       return progressIndicator!;
                     } else {
                       return Platform.isIOS
