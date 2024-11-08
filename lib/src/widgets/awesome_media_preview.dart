@@ -4,19 +4,20 @@ import 'package:camerawesome/src/orchestrator/models/media_capture.dart';
 import 'package:camerawesome/src/widgets/camera_awesome_builder.dart';
 import 'package:camerawesome/src/widgets/utils/awesome_bouncing_widget.dart';
 import 'package:camerawesome/src/widgets/utils/awesome_oriented_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AwesomeMediaPreview extends StatelessWidget {
   final MediaCapture? mediaCapture;
   final OnMediaTap onMediaTap;
-  final Widget progressIndicator;
+  final Widget? progressIndicator;
 
   const AwesomeMediaPreview({
     super.key,
     required this.mediaCapture,
     required this.onMediaTap,
-    required this.progressIndicator,
+    this.progressIndicator,
   });
 
   @override
@@ -48,7 +49,23 @@ class AwesomeMediaPreview extends StatelessWidget {
   Widget _buildMedia(MediaCapture? mediaCapture) {
     switch (mediaCapture?.status) {
       case MediaCaptureStatus.capturing:
-        return progressIndicator;
+        return progressIndicator ??
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Platform.isIOS
+                    ? const CupertinoActivityIndicator(
+                        color: Colors.white,
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2.0,
+                        ),
+                      ),
+              ),
+            );
       case MediaCaptureStatus.success:
         if (mediaCapture!.isPicture) {
           if (kIsWeb) {
@@ -66,7 +83,21 @@ class AwesomeMediaPreview extends StatelessWidget {
                       width: 300,
                     );
                   } else {
-                    return progressIndicator;
+                    if (progressIndicator != null) {
+                      return progressIndicator!;
+                    } else {
+                      return Platform.isIOS
+                          ? const CupertinoActivityIndicator(
+                              color: Colors.white,
+                            )
+                          : const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2.0,
+                              ),
+                            );
+                    }
                   }
                 });
           } else {
