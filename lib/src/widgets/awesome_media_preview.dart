@@ -24,9 +24,7 @@ class AwesomeMediaPreview extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 1,
         child: AwesomeBouncingWidget(
-          onTap: mediaCapture != null &&
-                  onMediaTap != null &&
-                  mediaCapture?.status == MediaCaptureStatus.success
+          onTap: mediaCapture != null && onMediaTap != null && mediaCapture?.status == MediaCaptureStatus.success
               ? () => onMediaTap!(mediaCapture!)
               : null,
           child: AnimatedContainer(
@@ -52,17 +50,9 @@ class AwesomeMediaPreview extends StatelessWidget {
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Platform.isIOS
-                ? const CupertinoActivityIndicator(
-                    color: Colors.white,
-                  )
-                : const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 2.0,
-                    ),
-                  ),
+            child: const CupertinoActivityIndicator(
+              color: Color(0xFFFFEDEF),
+            ),
           ),
         );
       case MediaCaptureStatus.success:
@@ -72,8 +62,7 @@ class AwesomeMediaPreview extends StatelessWidget {
             return FutureBuilder<Uint8List>(
                 future: mediaCapture.captureRequest.when(
                   single: (single) => single.file!.readAsBytes(),
-                  multiple: (multiple) =>
-                      multiple.fileBySensor.values.first!.readAsBytes(),
+                  multiple: (multiple) => multiple.fileBySensor.values.first!.readAsBytes(),
                 ),
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
@@ -104,8 +93,7 @@ class AwesomeMediaPreview extends StatelessWidget {
                   File(
                     mediaCapture.captureRequest.when(
                       single: (single) => single.file!.path,
-                      multiple: (multiple) =>
-                          multiple.fileBySensor.values.first!.path,
+                      multiple: (multiple) => multiple.fileBySensor.values.first!.path,
                     ),
                   ),
                 ),
