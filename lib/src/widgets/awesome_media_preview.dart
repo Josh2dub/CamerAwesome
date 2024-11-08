@@ -49,23 +49,27 @@ class AwesomeMediaPreview extends StatelessWidget {
   Widget _buildMedia(MediaCapture? mediaCapture) {
     switch (mediaCapture?.status) {
       case MediaCaptureStatus.capturing:
-        return progressIndicator ??
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Platform.isIOS
-                    ? const CupertinoActivityIndicator(
+        if (progressIndicator != null) {
+          debugPrint('MediaCaptureStatus.capturing indicator is not null');
+          return progressIndicator!;
+        } else {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Platform.isIOS
+                  ? const CupertinoActivityIndicator(
+                      color: Colors.white,
+                    )
+                  : const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(
                         color: Colors.white,
-                      )
-                    : const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2.0,
-                        ),
+                        strokeWidth: 2.0,
                       ),
-              ),
-            );
+                    ),
+            ),
+          );
+        }
       case MediaCaptureStatus.success:
         if (mediaCapture!.isPicture) {
           if (kIsWeb) {
@@ -84,6 +88,7 @@ class AwesomeMediaPreview extends StatelessWidget {
                     );
                   } else {
                     if (progressIndicator != null) {
+                      debugPrint('MediaCaptureStatus.success indicator is not null');
                       return progressIndicator!;
                     } else {
                       return Platform.isIOS
