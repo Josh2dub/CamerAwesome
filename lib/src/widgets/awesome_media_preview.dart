@@ -98,13 +98,11 @@ class AwesomeMediaPreview extends StatelessWidget {
           } else {
             return Image(
               fit: BoxFit.cover,
-              image: ResizeImage(
-                FileImage(
-                  File(
-                    mediaCapture.captureRequest.when(
-                      single: (single) => single.file!.path,
-                      multiple: (multiple) => multiple.fileBySensor.values.first!.path,
-                    ),
+              image: FileImage(
+                File(
+                  mediaCapture.captureRequest.when(
+                    single: (single) => single.file!.path,
+                    multiple: (multiple) => multiple.fileBySensor.values.first!.path,
                   ),
                 ),
               ),
