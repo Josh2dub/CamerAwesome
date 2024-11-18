@@ -107,7 +107,6 @@ class AwesomeMediaPreview extends StatelessWidget {
                     ),
                   ),
                 ),
-                width: 300,
               ),
             );
           }
