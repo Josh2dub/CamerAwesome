@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:camerawesome/camerawesome_plugin.dart' as cameraAwesomePreview;
 import 'package:camerawesome/pigeon.dart';
 import 'package:flutter/material.dart';
 
 final previewWidgetKey = GlobalKey();
 
-typedef OnPreviewCalculated = void Function(Preview preview);
+typedef OnPreviewCalculated = void Function(cameraAwesomePreview.Preview preview);
 
 class AnimatedPreviewFit extends StatefulWidget {
   final Alignment alignment;
@@ -85,7 +86,7 @@ class _AnimatedPreviewFitState extends State<AnimatedPreviewFit> {
   void _handPreviewCalculated() {
     if (widget.onPreviewCalculated != null) {
       widget.onPreviewCalculated!(
-        Preview(
+        cameraAwesomePreview.Preview(
           nativePreviewSize: widget.previewSize.toSize(),
           previewSize: sizeCalculator!.maxSize,
           offset: sizeCalculator!.offset,

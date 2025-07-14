@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:camerawesome/camerawesome_plugin.dart' as cameraAwesomePreview;
 import 'package:camerawesome/pigeon.dart';
 import 'package:camerawesome/src/widgets/preview/awesome_preview_fit.dart';
 import 'package:flutter/cupertino.dart';
@@ -60,7 +61,7 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
   StreamSubscription? _aspectRatioSubscription;
   CameraAspectRatios? _aspectRatio;
   double? _aspectRatioValue;
-  Preview? _preview;
+  cameraAwesomePreview.Preview? _preview;
 
   // TODO: fetch this value from the native side
   final int kMaximumSupportedFloatingPreview = 3;

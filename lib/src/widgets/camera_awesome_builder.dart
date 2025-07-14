@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:camerawesome/camerawesome_plugin.dart' as camerawesomePreview;
 import 'package:camerawesome/pigeon.dart';
 import 'package:camerawesome/src/orchestrator/camera_context.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ typedef CameraLayoutBuilder = Widget Function(
   /// relative to the preview (inside or outside for instance)
   //Rect previewRect,
 
-  Preview preview,
+    camerawesomePreview.Preview preview,
 );
 
 /// Callback when a video or photo has been saved and user click on thumbnail
@@ -438,7 +439,7 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
                 child: !widget.showPreview
                     ? widget.builder(
                         snapshot.requireData,
-                        Preview.hidden(),
+                  camerawesomePreview.Preview.hidden(),
                       )
                     : AwesomeCameraPreview(
                         key: _cameraPreviewKey,
